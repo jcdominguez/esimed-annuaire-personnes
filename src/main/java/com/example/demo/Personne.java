@@ -2,6 +2,8 @@ package com.example.demo;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="personnes")
@@ -17,6 +19,13 @@ public class Personne {
     @ManyToOne
     private Entreprise employeur;
 
+    @ManyToMany
+    @JoinTable(name="personnes_metiers",
+            joinColumns = @JoinColumn(name="personne_id"),
+            inverseJoinColumns = @JoinColumn(name="metier_id")
+    )
+    private List<Metier> metiers = new ArrayList<>();
+
     private LocalDate dateAnniversaire;
 
     public Personne(String prenom, String nom, int age) {
@@ -26,6 +35,10 @@ public class Personne {
     }
 
     public Personne() {
+    }
+
+    public void addMetier(Metier m){
+        metiers.add(m);
     }
 
     public String getPrenom() {
@@ -74,6 +87,14 @@ public class Personne {
 
     public void setEmployeur(Entreprise employeur) {
         this.employeur = employeur;
+    }
+
+    public List<Metier> getMetiers() {
+        return metiers;
+    }
+
+    public void setMetiers(List<Metier> metiers) {
+        this.metiers = metiers;
     }
 
     @Override

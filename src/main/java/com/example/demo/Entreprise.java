@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="entreprises")
@@ -13,6 +15,10 @@ public class Entreprise {
     private String nom;
     private String adressePostale;
     private String numeroTelephone;
+
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name="employeur_id ")
+    private List<Personne> employes = new ArrayList<>();
 
     public Entreprise() {
     }
@@ -43,5 +49,21 @@ public class Entreprise {
 
     public void setNumeroTelephone(String numeroTelephone) {
         this.numeroTelephone = numeroTelephone;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Personne> getEmployes() {
+        return employes;
+    }
+
+    public void setEmployes(List<Personne> employes) {
+        this.employes = employes;
     }
 }

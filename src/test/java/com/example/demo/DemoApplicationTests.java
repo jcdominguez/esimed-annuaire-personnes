@@ -21,8 +21,13 @@ class DemoApplicationTests {
         michel.setEmployeur(twitter);
         personneRepository.save(michel);
 
+        Personne marie = new Personne("Marie", "Dupont", 33);
+        marie.setEmployeur(twitter);
+        personneRepository.save(marie);
 
 
+        twitter = entrepriseRepository.findById(1).get();
+        System.out.println(twitter.getEmployes().size());
     }
 
 }

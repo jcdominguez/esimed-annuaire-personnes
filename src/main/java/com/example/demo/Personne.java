@@ -14,6 +14,9 @@ public class Personne {
     private String nom;
     private int age;
 
+    @ManyToOne
+    private Entreprise employeur;
+
     private LocalDate dateAnniversaire;
 
     public Personne(String prenom, String nom, int age) {
@@ -63,6 +66,14 @@ public class Personne {
 
     public void setDateAnniversaire(LocalDate dateAnniversaire) {
         this.dateAnniversaire = dateAnniversaire;
+    }
+
+    public Entreprise getEmployeur() {
+        return employeur;
+    }
+
+    public void setEmployeur(Entreprise employeur) {
+        this.employeur = employeur;
     }
 
     @Override
